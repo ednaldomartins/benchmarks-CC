@@ -2,5 +2,6 @@ package model
 
 interface Benchmark
 {
-    fun benchmark(vetor: IntArray)
+    fun benchmark()
+    fun criarTeste(tamanho:Int)
 }
