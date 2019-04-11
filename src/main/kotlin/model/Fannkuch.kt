@@ -4,11 +4,12 @@ import util.Print
 
 class Fannkuch: Benchmark
 {
+    lateinit var vetor: IntArray
     /**
      * IntArray = int[]         ---> primitiva
      * Array<Int> = Integer[]   ---> Objeto
      */
-    override fun benchmark(vetor: IntArray)
+    override fun benchmark()
     {
         var i = 0
         var count = 0
@@ -47,6 +48,15 @@ class Fannkuch: Benchmark
         for (i in 0 .. (elemento-1) )
             vetor[i] = aux[ (elemento-i)-1]
 
+    }
+
+    override fun criarTeste(tamanho:Int)
+    {
+        vetor = IntArray(tamanho)
+        for (i in 0 .. tamanho-1)
+            vetor[i] = i
+        vetor.sortDescending()
+        Print.printArray(vetor)
     }
 
 }
