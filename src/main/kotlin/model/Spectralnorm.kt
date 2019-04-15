@@ -14,12 +14,12 @@ class Spectralnorm: Benchmark
     {
         construirMatrizA()
         construirMatrizTransposta(matrizA)
-        multiplicarMatrizes(matrizA, matrizTransposta)
+        multiplicarMatrizes(matrizTransposta, matrizA)
         fatoracaoLU(matrizResultante)
 
-        resultado = matrizResultante[0][0]
-        for (i in 1 .. (matrizResultante.size-1))
-            resultado *= matrizResultante[i][i]
+        //resultado = Math.pow(matrizResultante[0][0], 2.0)
+        for (i in 0 .. (matrizResultante.size-1))
+            resultado += Math.pow(matrizResultante[0][i], 2.0)
         resultado = Math.sqrt(Math.abs( resultado ))
         println("\n\n"+resultado)
     }
@@ -55,6 +55,7 @@ class Spectralnorm: Benchmark
                 a += i + j
             }
         }
+        print("\n\n divisor ")
         Print.printMatriz(matriz)
         //terceira parte
         for (i in 0 .. (matriz.size-1))
@@ -62,6 +63,7 @@ class Spectralnorm: Benchmark
             for (j in 0 .. (matriz.size-1))
                 matrizA[i][j] = 1.0/(matriz[i][j])
         }
+        print("\n\n matriz A")
         Print.printMatriz(matrizA)
     }
 
@@ -73,6 +75,7 @@ class Spectralnorm: Benchmark
             for (j in 0 .. (m.size-1))
                 matrizTransposta[j][i] = m[i][j]
         }
+        print("\n\n matriz Transposta")
         Print.printMatriz(matrizTransposta)
     }
 
@@ -85,14 +88,15 @@ class Spectralnorm: Benchmark
         //multiplicação de linhaXcoluna termo a termo
         for (i in 0 .. (m1.size-1))
         {
-            var res = 0.0
             for (j in 0 .. (m1.size-1))
             {
+                var res = 0.0
                 for (k in 0 .. (m1.size-1))
-                    res += m1[i][k]*m2[j][k]
+                    res += m1[i][k]*m2[k][j]
                 matrizResultante[i][j] = res
             }
         }
+        print("\n\nAt*A")
         Print.printMatriz(matrizResultante)
     }
 
@@ -103,7 +107,7 @@ class Spectralnorm: Benchmark
      *  nenhum linha dividindo termo por 0. Esse metodo vai apenas usar
      *  os conceitos da fatoração LU para construir a matriz U
      */
-    private fun fatoracaoLU(mU: Array<DoubleArray>)
+    private fun fatoracaoLU( mU: Array<DoubleArray>)
     {
         var mL = Array(mU.size) {DoubleArray(mU.size)}
         for (i in 0 .. (mU.size-1))
@@ -116,13 +120,17 @@ class Spectralnorm: Benchmark
             {
                 for (k in i .. (mU.size-1))
                 {
-
-                    mU[j][k] = mU[j][k] - mL[j][k] * mU[i][k]
+                    var res = mU[j][k] - mL[j][i] * mU[i][k]
+                    //println("\nL$j ${mU[j][k]} - pivo: ${mL[j][i]} * L$i ${mU[i][k]} \nresultado: $res")
+                    mU[j][k] = res
 
                 }
             }
 
         }
+        println("\n\n matriz L")
+        Print.printMatriz(mL)
+        println("\n\n matriz U")
         Print.printMatriz(mU)
     }
 }
