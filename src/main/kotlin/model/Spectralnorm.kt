@@ -15,12 +15,13 @@ class Spectralnorm: Benchmark
         construirMatrizA()
         construirMatrizTransposta(matrizA)
         multiplicarMatrizes(matrizTransposta, matrizA)
-        fatoracaoLU(matrizResultante)
 
-        //resultado = Math.pow(matrizResultante[0][0], 2.0)
         for (i in 0 .. (matrizResultante.size-1))
-            resultado += Math.pow(matrizResultante[0][i], 2.0)
-        resultado = Math.sqrt(Math.abs( resultado ))
+        {
+            for (j in 0 .. (matrizResultante.size-1))
+                resultado += Math.pow(matrizResultante[i][j], 2.0)
+        }
+        resultado = Math.sqrt(( resultado ))
         println("\n\n"+resultado)
     }
 
@@ -55,16 +56,12 @@ class Spectralnorm: Benchmark
                 a += i + j
             }
         }
-        print("\n\n divisor ")
-        Print.printMatriz(matriz)
         //terceira parte
         for (i in 0 .. (matriz.size-1))
         {
             for (j in 0 .. (matriz.size-1))
                 matrizA[i][j] = 1.0/(matriz[i][j])
         }
-        print("\n\n matriz A")
-        Print.printMatriz(matrizA)
     }
 
     private fun construirMatrizTransposta(m: Array<DoubleArray>)
@@ -75,8 +72,6 @@ class Spectralnorm: Benchmark
             for (j in 0 .. (m.size-1))
                 matrizTransposta[j][i] = m[i][j]
         }
-        print("\n\n matriz Transposta")
-        Print.printMatriz(matrizTransposta)
     }
 
     private fun multiplicarMatrizes(m1: Array<DoubleArray>, m2: Array<DoubleArray>)
@@ -96,41 +91,6 @@ class Spectralnorm: Benchmark
                 matrizResultante[i][j] = res
             }
         }
-        print("\n\nAt*A")
-        Print.printMatriz(matrizResultante)
     }
 
-    /*
-     *  (SEM PIVOTEAMENTO PARCIAL)
-     *  Posso usar o metodo diretamente sem reordenar a matriz porque
-     *  nenhum das linhas ou colunas possuem 0, portante, nao terei
-     *  nenhum linha dividindo termo por 0. Esse metodo vai apenas usar
-     *  os conceitos da fatoração LU para construir a matriz U
-     */
-    private fun fatoracaoLU( mU: Array<DoubleArray>)
-    {
-        var mL = Array(mU.size) {DoubleArray(mU.size)}
-        for (i in 0 .. (mU.size-1))
-        {
-            //pivos
-            for (j in (i+1) .. (mU.size-1))
-                mL[j][i] = mU[j][i]/mU[i][i]
-
-            for (j in (i+1) .. (mU.size-1))
-            {
-                for (k in i .. (mU.size-1))
-                {
-                    var res = mU[j][k] - mL[j][i] * mU[i][k]
-                    //println("\nL$j ${mU[j][k]} - pivo: ${mL[j][i]} * L$i ${mU[i][k]} \nresultado: $res")
-                    mU[j][k] = res
-
-                }
-            }
-
-        }
-        println("\n\n matriz L")
-        Print.printMatriz(mL)
-        println("\n\n matriz U")
-        Print.printMatriz(mU)
-    }
 }
