@@ -4,16 +4,16 @@ class Print
 {
     companion object
     {
-        fun printArray(intArray: IntArray)
+        fun printArray(intArray: IntArray, nomeArray: String = "")
         {
-            print("\n\nIntArray:")
+            print("\n\n${intArray.javaClass.canonicalName}: $nomeArray")
             for ( i in 0 .. (intArray.size-1) )
                 print(" " + intArray[i])
         }
 
-        fun printMatriz(intMatriz: Array<IntArray>)
+        fun printMatriz(intMatriz: Array<IntArray>, nomeMatriz: String = "")
         {
-            print("\n\nIntMatriz:")
+            print("\n\n${intMatriz.javaClass.canonicalName}: $nomeMatriz")
             for (i in 0 .. (intMatriz.size-1))
             {
                 print("\n")
@@ -22,9 +22,9 @@ class Print
             }
         }
 
-        fun printMatriz(floatMatriz: Array<FloatArray>)
+        fun printMatriz(floatMatriz: Array<FloatArray>, nomeMatriz: String = "")
         {
-            print("\n\nFloatMatriz:")
+            print("\n\n${floatMatriz.javaClass.canonicalName}: $nomeMatriz")
             for (i in 0 .. (floatMatriz.size-1))
             {
                 print("\n")
@@ -33,9 +33,9 @@ class Print
             }
         }
 
-        fun printMatriz(doubleMatriz: Array<DoubleArray>)
+        fun printMatriz(doubleMatriz: Array<DoubleArray>, nomeMatriz: String = "")
         {
-            print("\n\nFloatMatriz:")
+            print("\n\n${doubleMatriz.javaClass.canonicalName}: $nomeMatriz")
             for (i in 0 .. (doubleMatriz.size-1))
             {
                 print("\n")
