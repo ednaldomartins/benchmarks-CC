@@ -14,8 +14,7 @@ class BenchmarksController
         benchmark.benchmark()
         val tempo = (System.currentTimeMillis() - tempoInicial)
 
-        //Print.printConsumoMemoriaMB()
-        //println("\nnProcessadores: ${Runtime.getRuntime().availableProcessors()}")
+        Print.printConsumoMemoriaMB()
         println( "\n\ntempo: ${tempo}ms" )
     }
 }
