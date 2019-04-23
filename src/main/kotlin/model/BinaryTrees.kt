@@ -1,5 +1,6 @@
 package model
 
+import util.Print
 import java.io.IOException
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
