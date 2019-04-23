@@ -1,18 +1,21 @@
 package control
 
 import model.Benchmark
+import util.Print
 
 class BenchmarksController
 {
     fun benchmarks(benchmark: Benchmark, tamanho: Int)
     {
         benchmark.criarTeste(tamanho)
+        Print.printConsumoMemoriaMB()
 
         val tempoInicial = System.currentTimeMillis()
         benchmark.benchmark()
-        val tempoFinal = System.currentTimeMillis()
+        val tempo = (System.currentTimeMillis() - tempoInicial)
 
-        val tempo = (tempoFinal - tempoInicial)
-        println( "\n\n\n\n\ntempo: $tempo milesegundos" )
+        //Print.printConsumoMemoriaMB()
+        //println("\nnProcessadores: ${Runtime.getRuntime().availableProcessors()}")
+        println( "\n\ntempo: ${tempo}ms" )
     }
 }
