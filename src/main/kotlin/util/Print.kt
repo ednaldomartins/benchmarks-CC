@@ -43,5 +43,15 @@ class Print
                     print(" ${doubleMatriz[i][j]}")
             }
         }
+
+        fun printConsumoMemoriaMB()
+        {
+            val mb = (1024*1024)
+            val rt: Runtime = Runtime.getRuntime()
+            println("\nMemória Máxima:\t${rt.maxMemory()/mb}MB" +
+                    "\nMemória Total:\t${rt.totalMemory()/mb}MB" +
+                    "\nMemoria livre:\t${rt.freeMemory()/mb}MB" +
+                    "\nMemória em uso:\t${(rt.totalMemory()-rt.freeMemory())/mb}MB\n")
+        }
     }
 }
