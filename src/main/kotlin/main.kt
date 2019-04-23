@@ -1,40 +1,43 @@
 import control.BenchmarksController
-import model.Fannkuch
-import model.Spectralnorm
-import java.util.*
+import model.*
 
 fun main()
 {
-    //var bm:Benchmark
-
-    //teste do site online: https://benchmarksgame-team.pages.debian.net/benchmarksgame/description/fannkuchredux.html
-    //var v1 = intArrayOf(3,1,0,4,2)
-    //bm = Fannkuch()
-    //bm.criarTeste(5)
-    //bm.vetor = v1
-    //bm.benchmark()
-
-
-    //teste 2: spectralnorm
-    //bm = Spectralnorm()
-    //bm.criarTeste(10)
-    var bc = BenchmarksController()
+    val bc = BenchmarksController()
     print("Escolha um dos teste abaixo:" +
             "\n1. Fannkuch" +
             "\n2. Spectralnorm" +
-            "\n")
-    val input =Integer.parseInt( readLine()!! )
-    when(input )
+            "\n3. NBody" +
+            "\n4. BinaryTree" +
+            "\n5. Mandelbrot" +
+            "\n\nopcao: ")
+    val input = Integer.parseInt( readLine()!! )
+    when( input )
     {
         1 -> {
-            println("Digite o tamanho do teste")
+            println("Digite o tamanho do vetor")
             val tamanho = Integer.parseInt( readLine()!! )
             bc.benchmarks(Fannkuch(), tamanho)
         }
         2 ->{
-            println("Digite o tamanho do teste")
+            println("Digite o tamanho da matriz (tamanhoXtamanho)")
             val tamanho = Integer.parseInt( readLine()!! )
             bc.benchmarks(Spectralnorm(), tamanho)
+        }
+        3 -> {
+            println("Digite o tamanho do teste (tamanho<1 para n = 50000000)")
+            val tamanho = Integer.parseInt( readLine()!! )
+            bc.benchmarks(NBody(), tamanho)
+        }
+        4 -> {
+            println("Digite o tamanho da profundidade da árvore(se menor que 6, entao n = 6)")
+            val tamanho = Integer.parseInt( readLine()!! )
+            bc.benchmarks(BinaryTrees(), tamanho)
+        }
+        5 -> {
+            println("Digite o tamanho dos vetores e da matriz (tamanho<1 para n = 6000)")
+            val tamanho = Integer.parseInt( readLine()!! )
+            bc.benchmarks(Mandelbrot(), tamanho)
         }
         else-> println("Digite um valor existente no Menu")
     }
