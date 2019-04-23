@@ -13,21 +13,16 @@ class NBody : Benchmark {
 	var n = 50000000
 
     override fun criarTeste(tamanho: Int) {
-        this.n = tamanho
+        if (tamanho > 0) this.n = tamanho
     }
 
     override fun benchmark ()
     {
-        var tempoInicial = System.currentTimeMillis()
-
         var bodies = NBodySystem()
         println("\n %.9f".format(bodies.energy()))
         for (i in 0 .. n)
             bodies.advance(0.01)
         println("\n %.9f".format(bodies.energy()))
-
-        var tempoFinal = System.currentTimeMillis()
-        println( "tempo: " + (tempoFinal - tempoInicial) + " milesegundos" );
     }
 
 	class NBodySystem {
@@ -185,8 +180,8 @@ class NBody : Benchmark {
 				   dy = iy - bodies[joffset + y]
 				   dz = iz - bodies[joffset + z]
 
-				   distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-				   e -= (imass * bodies[joffset + mass]) / distance;
+				   distance = Math.sqrt(dx * dx + dy * dy + dz * dz)
+				   e -= (imass * bodies[joffset + mass]) / distance
 				}
 			}
 			return e

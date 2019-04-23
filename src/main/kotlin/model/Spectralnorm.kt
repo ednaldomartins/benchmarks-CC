@@ -1,7 +1,5 @@
 package model
 
-import util.Print
-
 class Spectralnorm: Benchmark
 {
     lateinit var matriz: Array<IntArray>

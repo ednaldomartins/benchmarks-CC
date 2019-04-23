@@ -28,9 +28,6 @@ class BinaryTrees: Benchmark {
 
     @Throws(IOException::class)
     override fun benchmark() {
-
-    	var tempoInicial = System.currentTimeMillis()
-
         val maxDepth = if ( n < (MIN_DEPTH+2) ) (MIN_DEPTH+2) else n
         val stretchDepth = maxDepth + 1
 
@@ -59,12 +56,8 @@ class BinaryTrees: Benchmark {
         EXECUTOR_SERVICE.awaitTermination(120L, TimeUnit.SECONDS)
 
         for ( str in results) println(str)
-
-        println("long lived tree of depth " + maxDepth +
-            "\t check: " + longLivedTree.itemCheck())
-
-        var tempoFinal = System.currentTimeMillis()
-    	System.out.println( "tempo: " + (tempoFinal - tempoInicial) + " milesegundos" );
+        println("long lived tree of depth $maxDepth \t check: ${longLivedTree.itemCheck()}")
+        Print.printConsumoMemoriaMB()
     }
 
     class TreeNode {
